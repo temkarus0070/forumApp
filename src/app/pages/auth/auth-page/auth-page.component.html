@@ -1,0 +1,7 @@
+<ng-form>
+  <label for="username">username</label>
+  <input id="username" type="text" [formControl]="username">
+  <label for="password">password</label>
+  <input id="password" [formControl]="password" type="password">
+  <input type="button" value="login" (click)="auth()">
+</ng-form>
