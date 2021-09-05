@@ -1,0 +1,17 @@
+#authForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+
+}
+
+
+
+#authForm input{
+  width: 30%;
+}
+#authForm input[type="button"]{
+  width:15%;
+}

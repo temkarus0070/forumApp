@@ -1,1 +1,10 @@
-<p>post-create-page works!</p>
+<ng-form id="form" [formGroup]="formGroup">
+  <select [formControl]="sectionControl" *ngFor="let section of availableSections">
+    <option name="section.id" [value]="section.id">{{section.name}}</option>
+  </select>
+  <label for="header">header</label>
+  <input id="header" [formControl]="headerControl" type="text">
+  <label for="text">text</label>
+  <textarea [formControl]="textControl"  id="text" cols="40" rows="40"></textarea>
+  <input  type="button" (click)="createPost()" value="create">
+</ng-form>

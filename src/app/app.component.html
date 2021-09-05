@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <body>
-<nav>
-  <a href="/login">login</a>
-  <a href="/register">register</a>
+<nav id="authNav">
+  <a href="/login" *ngIf="!isAuthorized">login</a>
+  <a href="/register" *ngIf="!isAuthorized">register</a>
+  <a href="/post/create" *ngIf="isAuthorized">create post</a>
+  <a href="" (click)="logout()" *ngIf="isAuthorized">logout</a>
 </nav>
-<app-home-page>
-
-</app-home-page>
 <router-outlet>
 
 </router-outlet>
+<p *ngIf="!isAuthorized">You have to be authorized to see and create posts</p>
 </body>

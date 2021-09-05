@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./auth-page.component.css']
 })
 export class AuthPageComponent implements OnInit {
+  public hasError:boolean=false;
   public username:FormControl=new FormControl();
  public password:FormControl=new FormControl();
  public formGroup:FormGroup=new FormGroup({"username":this.username,"password":this.password});
@@ -18,6 +19,10 @@ export class AuthPageComponent implements OnInit {
   }
 
   auth(){
+    this.hasError=false;
+    this.authService.authErrorHandler.subscribe(e=> {
+      this.hasError = true
+    });
     this.authService.auth(this.username.value,this.password.value);
   }
 

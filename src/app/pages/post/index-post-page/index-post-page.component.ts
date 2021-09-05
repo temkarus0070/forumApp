@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {post} from "../../../models/post";
+import {Post} from "../../../models/post";
 import {PostService} from "../../../services/post.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-index-post-page',
@@ -9,19 +10,26 @@ import {PostService} from "../../../services/post.service";
 })
 export class IndexPostPageComponent implements OnInit {
 
-  posts:Array<post>=new Array<post>();
+  posts:Array<Post>=new Array<Post>();
 
-  constructor(private postService:PostService) {
-
+  constructor(private postService:PostService,private router:Router) {
+this.router.events.subscribe(e=>{
+this.loadPosts();
+})
   }
 
 
 
   ngOnInit(): void {
-  this.postService.load().subscribe(posts=>
-  {console.log(posts);
-  this.posts=posts});
-
+    this.loadPosts();
   }
+
+  loadPosts() {
+    this.postService.load().subscribe(posts => {
+      console.log(posts);
+      this.posts = posts
+    },error => {console.log(error)});
+  }
+
 
 }

@@ -1,1 +1,8 @@
-<p>register-page works!</p>
+<ng-form [formGroup]="formGroup">
+  <label for="login">login</label>
+  <input [formControl]="login" id="login">
+  <label for="password">password</label>
+  <input [formControl]="password" id="password">
+  <input type="button" (click)="register()" value="Register">
+  <p *ngIf="hasError">Register error</p>
+</ng-form>

@@ -1,7 +1,11 @@
-export interface post{
+import {User} from "./user";
+import {Section} from "./Section";
+
+export interface Post {
   id:number;
-  authorId:string;
+  header:string;
+  author:User|null;
   date:Date;
-  sectionId:number;
+  section:Section|null;
   text:string;
 }

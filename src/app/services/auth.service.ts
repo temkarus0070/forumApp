@@ -1,24 +1,43 @@
-import { Injectable } from '@angular/core';
+import {EventEmitter, Injectable, OnInit, Output} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Router} from "@angular/router";
+import {BACKEND_URL} from "../app.module";
+import {LocalStorageService} from "./local-storage.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService implements OnInit{
+
+  ngOnInit(): void {
+
+  }
+
+
+
 
   private login:string="";
-  constructor(private httpClient:HttpClient,private route:Router) { }
+  private  token:string="";
+  constructor(private httpClient:HttpClient,private route:Router,private localStorageService:LocalStorageService) {
+    this.login=this.localStorageService.getKey("user")+"";
+    this.token=this.localStorageService.getKey("token")+"";
+  }
+
+  authErrorHandler:EventEmitter<string>=new EventEmitter<string>();
+
+
 
   auth(username:string,password:string):void{
-    var token:string=this.createAuthToken(username,password);
-  let headers:HttpHeaders=new HttpHeaders({Authorization:token})
-   this.httpClient.get("http://localhost:8080/",{headers,responseType:'text' as 'json'}).subscribe(e=> {
-     this.login = username;
-     this.registerToken(token);
-     this.route.navigateByUrl("/")
-   }
+    const token: string = this.createAuthToken(username, password);
+    let headers:HttpHeaders=new HttpHeaders({Authorization:token})
+    this.registerAuthData(token,username);
+   this.httpClient.get(BACKEND_URL+"/posts",{headers,responseType:'text' as 'json'}).subscribe(e=> {
+
+   },
+     error => {
+       this.authErrorHandler.emit("login error")
+     }
   );
   }
 
@@ -26,26 +45,46 @@ export class AuthService {
     return 'Basic '+window.btoa(username+":"+password);
   }
 
-  registerToken(token:string){
-    sessionStorage.setItem("user",this.login);
-    sessionStorage.setItem("token",token);
+  registerAuthData(token:string,username:string){
+    this.token=token;
+    this.login=username;
+    this.localStorageService.add(["user",this.login],["token",this.token]).subscribe(
+      e=>this.route.navigate(["/"])
+
+    );
+
+  }
+
+  register(username:string,password:string){
+    this.httpClient.post(BACKEND_URL+"/register",{username:username,password:password})
+      .subscribe(e=>{
+        this.auth(username,password);
+        },
+        error=>{
+        this.authErrorHandler.emit("register error");
+        })
   }
 
   logout(){
-    sessionStorage.removeItem("user");
-    sessionStorage.removeItem("token");
-    this.login="";
+    this.localStorageService.remove("user","token").subscribe(e=> {
+      this.login = ""
+    this.token="";
+      this.route.navigateByUrl("/login");
+    });
   }
 
   isAuth(){
-    return !sessionStorage.getItem("user")==null;
+    return this.localStorageService.hasKey("token");
   }
+
+
 
   getUsername():string{
     return this.login;
   }
 
   getToken():string{
-    return <string>sessionStorage.getItem("token");
+   return this.token;
   }
+
 }

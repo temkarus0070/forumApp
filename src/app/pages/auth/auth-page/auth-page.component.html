@@ -1,7 +1,10 @@
-<ng-form>
+<div>
+<ng-form id="authForm">
   <label for="username">username</label>
   <input id="username" type="text" [formControl]="username">
   <label for="password">password</label>
   <input id="password" [formControl]="password" type="password">
   <input type="button" value="login" (click)="auth()">
+  <p *ngIf="this.hasError">Login error</p>
 </ng-form>
+</div>

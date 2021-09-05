@@ -11,8 +11,8 @@ export class AuthInterceptor implements HttpInterceptor{
     if(this.AuthService.isAuth()){
       const authRrq=req.clone({
         headers:new HttpHeaders({
-          'Content-Type':'application-json',
-          'Authorization':this.AuthService.getToken()
+          'Content-Type':'application/json',
+          'Authorization':this.AuthService.getToken(),
         })
       });
       return next.handle(authRrq);
