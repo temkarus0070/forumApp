@@ -1,1 +1,20 @@
-<p>show-post-page works!</p>
+<header>
+  <h2>{{post.header}}</h2>
+</header>
+<div>
+  <pre>{{post.text}}</pre>
+
+</div>
+<div>
+
+    <input [(ngModel)]="comment" type="text">
+    <input (click)="createComment()"  type="button" value="comment">
+</div>
+<div id="comments" *ngFor="let comment of post.comments">
+  <div class="comment">
+    <p>{{comment.user?.username}}</p>
+  <p>{{comment.text}}</p>
+    <button (click)="deleteComment(comment.id)">remove</button>
+  </div>
+
+</div>

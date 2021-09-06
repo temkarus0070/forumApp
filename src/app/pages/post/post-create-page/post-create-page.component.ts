@@ -46,7 +46,8 @@ export class PostCreatePageComponent implements OnInit {
         name:""
       },
       date:new Date(),
-      id:0
+      id:0,
+      comments:[]
     };
     this.postService.create(post);
   }

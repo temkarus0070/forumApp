@@ -31,9 +31,9 @@ export class AuthService implements OnInit{
   auth(username:string,password:string):void{
     const token: string = this.createAuthToken(username, password);
     let headers:HttpHeaders=new HttpHeaders({Authorization:token})
-    this.registerAuthData(token,username);
-   this.httpClient.get(BACKEND_URL+"/posts",{headers,responseType:'text' as 'json'}).subscribe(e=> {
 
+   this.httpClient.get(BACKEND_URL+"/posts",{headers,responseType:'text' as 'json'}).subscribe(e=> {
+       this.registerAuthData(token,username);
    },
      error => {
        this.authErrorHandler.emit("login error")

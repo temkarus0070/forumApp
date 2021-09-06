@@ -26,4 +26,8 @@ export class PostService {
       console.log(error);
     })
   }
+
+  get(id:number):Observable<Post>{
+    return  this.httpClient.get<Post>(BACKEND_URL+"/posts/"+id);
+  }
 }
