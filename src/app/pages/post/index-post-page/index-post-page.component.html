@@ -4,6 +4,7 @@
       <a routerLink="/posts/{{post.id}}">{{post.header}}</a>
       <p>{{post.text}}</p>
       <p>{{post.date | date}}</p>
+      <button *ngIf="isAdmin()" (click)="remove(post.id)">delete</button>
     </div>
   </li>
 </ul>

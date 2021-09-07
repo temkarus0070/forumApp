@@ -20,5 +20,9 @@ export class AppComponent {
 this.authService.logout();
   }
 
+  isAdmin():boolean{
+    return this.authService.hasAdminRole();
+  }
+
   title = 'forumApp';
 }

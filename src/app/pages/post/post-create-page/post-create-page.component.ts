@@ -24,6 +24,7 @@ export class PostCreatePageComponent implements OnInit {
     router.events.subscribe(e=>{
       sectionService.load().subscribe(
         e=> {
+          console.log("sections downloaded")
           console.log(e);
           this.availableSections = e
         }
