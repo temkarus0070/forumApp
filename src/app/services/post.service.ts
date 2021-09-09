@@ -4,13 +4,14 @@ import {Post} from "../models/post";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BACKEND_URL} from "../app.module";
 import {stringify} from "@angular/compiler/src/util";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient,private router:Router) { }
 
   load():Observable<Array<Post>>{
 
@@ -23,10 +24,11 @@ export class PostService {
   }
 
   create(post:Post){
-    console.log(post);
     let httpHeaders:HttpHeaders=new HttpHeaders();
     httpHeaders.set("Content-Type","application/json");
-    this.httpClient.post(BACKEND_URL+"/post",JSON.stringify(post),{  headers:httpHeaders}).subscribe(e=>{},error => {
+    this.httpClient.post(BACKEND_URL+"/post",JSON.stringify(post),{  headers:httpHeaders}).subscribe(e=>{
+      this.router.navigateByUrl("/");
+    },error => {
       console.log(error);
     })
   }

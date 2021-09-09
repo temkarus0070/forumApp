@@ -5,9 +5,9 @@
 </div>
 <div id="comments" *ngFor="let comment of comments">
   <div class="comment">
-    <p>{{comment.user?.username}}</p>
+    <p id="authorName">{{comment.user?.username}}</p>
     <p>{{comment.text}}</p>
-    <button *ngIf="canDeleteComment(comment)" (click)="deleteCommentFromPost(comment.id)">remove</button>
+    <button class="deleteBtn" *ngIf="canDeleteComment(comment)" (click)="deleteCommentFromPost(comment.id)">remove</button>
   </div>
 
 </div>

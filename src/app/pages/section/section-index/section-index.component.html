@@ -1,6 +1,9 @@
-<ul *ngFor="let section of sections">
-  <li>
+<div class="entityList">
+<ul >
+  <li *ngFor="let section of sections">
     <a  [routerLink]="['post',section.id]">{{section.name}}</a>
-    <input *ngIf="isAdmin()" type="button" value="delete" (click)="remove(section.id)">
-  </li> 
+    <input *ngIf="isAdmin()" class="deleteBtn" type="button" value="delete" (click)="remove(section.id)">
+  </li>
 </ul>
+
+</div>

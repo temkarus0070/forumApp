@@ -1,6 +1,6 @@
 <ng-form id="form" [formGroup]="formGroup">
-  <select [formControl]="sectionControl" *ngFor="let section of availableSections">
-    <option name="section.id" [value]="section.id">{{section.name}}</option>
+  <select [formControl]="sectionControl">
+    <option name="section.id" [value]="section.id" *ngFor="let section of availableSections">{{section.name}}</option>
   </select>
   <label for="header">header</label>
   <input id="header" [formControl]="headerControl" type="text">

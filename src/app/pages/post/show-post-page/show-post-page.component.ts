@@ -4,6 +4,7 @@ import {Post} from "../../../models/post";
 import {Observable} from "rxjs";
 import {CommentService} from "../../../services/CommentService";
 import {Comment} from "../../../models/comment";
+import {PostService} from "../../../services/post.service";
 
 @Component({
   selector: 'app-show-post-page',
@@ -11,12 +12,13 @@ import {Comment} from "../../../models/comment";
   styleUrls: ['./show-post-page.component.css']
 })
 export class ShowPostPageComponent implements OnInit {
-  comment:string="";
+  comment:Comment={text:"",
+  post:null, id:0, user:null};
 
 
   public post:Post={
     id:0,
-    author:null,
+    user:{username:""},
     header:"",
     date:new Date(),
     section:null,
@@ -24,22 +26,27 @@ export class ShowPostPageComponent implements OnInit {
     comments:[]
   };
 
-  constructor(private router:ActivatedRoute,private commentService:CommentService) {
+  constructor(private router:ActivatedRoute,private commentService:CommentService,private postService:PostService) {
     router.data.subscribe(e=>
     {
       this.post = e.post;
-      console.log(this.post);
     })
 
   }
 
+  loadPost(){
+    console.log("Load")
+    this.postService.get(this.post.id).subscribe(e=>this.post=e)
+  }
+
   createComment(){
-    let comment:Comment={text:this.comment,post:this.post,user:null,id:0};
+    let comment:Comment={text:this.comment.text, post:{id:this.post.id} as Post} as Comment;
     this.commentService.create(comment);
   }
 
   deleteComment(id:number){
     this.commentService.delete(id);
+    this.loadPost();
   }
 
   ngOnInit(): void {

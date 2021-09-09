@@ -24,5 +24,9 @@ this.authService.logout();
     return this.authService.hasAdminRole();
   }
 
+  isHomePage():boolean{
+    return this.router.url=="/";
+  }
+
   title = 'forumApp';
 }

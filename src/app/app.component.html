@@ -3,9 +3,11 @@
 <nav id="authNav">
   <a href="/login" *ngIf="!isAuthorized">login</a>
   <a href="/register" *ngIf="!isAuthorized">register</a>
+  <a *ngIf="!isHomePage()" routerLink=""> home</a>
   <a href="/post/create" *ngIf="isAuthorized">create post</a>
-  <a href="" (click)="logout()" *ngIf="isAuthorized">logout</a>
   <a href="/section/create" *ngIf="isAdmin()">create section</a>
+  <a href="" (click)="logout()" *ngIf="isAuthorized">logout</a>
+
 </nav>
 <router-outlet>
 

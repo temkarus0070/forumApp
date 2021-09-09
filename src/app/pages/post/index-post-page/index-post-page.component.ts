@@ -17,6 +17,7 @@ export class IndexPostPageComponent implements OnInit {
 
 this.router.events.subscribe(e=>{
   this.routerHandler.params.subscribe(e=>{
+    console.log(e.id);
     this.loadPosts(e.id);
   })
 
@@ -27,13 +28,12 @@ this.router.events.subscribe(e=>{
 
 
   ngOnInit(): void {
-    this.loadPosts();
+
   }
 
   loadPosts(sectionId?:number) {
     if(sectionId) {
       this.postService.loadBySection(sectionId).subscribe(posts => {
-        console.log(posts);
         this.posts = posts
       }, error => {
         console.log(error)
@@ -41,7 +41,6 @@ this.router.events.subscribe(e=>{
     }
     else{
       this.postService.load().subscribe(posts => {
-        console.log(posts);
         this.posts = posts
       }, error => {
         console.log(error)

@@ -25,7 +25,6 @@ export class CommentService{
   }
 
   create(comment:Comment){
-    console.log(comment)
     this.httpService.post(BACKEND_URL+"/comment",comment).subscribe(e=>{},
       error => console.log(error));
   }
