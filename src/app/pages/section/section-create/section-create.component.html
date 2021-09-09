@@ -1,0 +1,11 @@
+<div id="createFormContainer">
+<form [formGroup]="formGroup">
+  <div class="name">
+  <label for="name">name</label>
+  <input [formControl]="nameControl" type="text" id="name">
+  </div>
+  <div>
+  <input type="button" value="create section" (click)="create()">
+  </div>
+</form>
+</div>
