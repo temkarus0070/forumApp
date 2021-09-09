@@ -17,6 +17,7 @@ import { SectionCreateComponent } from './pages/section/section-create/section-c
 import { SectionIndexComponent } from './pages/section/section-index/section-index.component';
 import { PostComponent } from './components/post/post.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import {EscapePipe} from "./pipes/EscapePipe";
 
 export const routes:Routes=[{path:"login",component:AuthPageComponent},{path:"register", component:RegisterPageComponent},{path:"post/create",component:PostCreatePageComponent},
   {path:"",component:HomePageComponent},{path:"posts/:id",component:ShowPostPageComponent,resolve:{"post":PostResolver}},{path:"post/:id",component:IndexPostPageComponent},
@@ -34,7 +35,8 @@ export const routes:Routes=[{path:"login",component:AuthPageComponent},{path:"re
     SectionCreateComponent,
     SectionIndexComponent,
     PostComponent,
-    CommentsComponent
+    CommentsComponent,
+    EscapePipe
   ],
   imports: [
     BrowserModule,

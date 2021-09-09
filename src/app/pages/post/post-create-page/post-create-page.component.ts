@@ -42,9 +42,9 @@ export class PostCreatePageComponent implements OnInit {
 
   createPost(){
     let post:Post={
-      text:this.textControl.value,
+      text:this.repairTextFromQuoutes(this.textControl.value),
       user:null,
-      header:this.headerControl.value,
+      header:this.repairTextFromQuoutes(this.headerControl.value),
       section:{
         id:Number(this.sectionControl.value),
         name:""
@@ -54,6 +54,10 @@ export class PostCreatePageComponent implements OnInit {
       comments:[]
     };
     this.postService.create(post);
+  }
+
+  repairTextFromQuoutes(text:string):string{
+    return text.replace(/"/g, '\\"');
   }
 
 }

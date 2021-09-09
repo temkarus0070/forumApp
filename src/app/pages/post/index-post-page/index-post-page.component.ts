@@ -10,6 +10,7 @@ import {AuthService} from "../../../services/auth.service";
   styleUrls: ['./index-post-page.component.css']
 })
 export class IndexPostPageComponent implements OnInit {
+  sectionId:number|null=null;
 
   posts:Array<Post>=new Array<Post>();
 
@@ -17,7 +18,7 @@ export class IndexPostPageComponent implements OnInit {
 
 this.router.events.subscribe(e=>{
   this.routerHandler.params.subscribe(e=>{
-    console.log(e.id);
+    this.sectionId=e.id;
     this.loadPosts(e.id);
   })
 
@@ -34,6 +35,7 @@ this.router.events.subscribe(e=>{
   loadPosts(sectionId?:number) {
     if(sectionId) {
       this.postService.loadBySection(sectionId).subscribe(posts => {
+
         this.posts = posts
       }, error => {
         console.log(error)
@@ -54,7 +56,7 @@ this.router.events.subscribe(e=>{
 
   remove(id:number):void{
     this.postService.remove(id).subscribe(e=>{
-      this.loadPosts()
+      this.loadPosts(this.sectionId as number);
     },
       error => {
       console.log(error)

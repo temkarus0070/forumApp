@@ -3,7 +3,7 @@
   <li *ngFor="let post of posts">
     <div>
       <a routerLink="/posts/{{post.id}}">{{post.header}}</a>
-      <p>{{post.text}}</p>
+      <p>{{post.text | escape}}</p>
       <p>{{post.date | date}}</p>
       <button class="deleteBtn" *ngIf="isAdmin()" (click)="remove(post.id)">delete</button>
     </div>
