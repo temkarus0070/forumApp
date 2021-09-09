@@ -18,6 +18,10 @@ export class PostService {
 
   }
 
+  loadBySection(id:number):Observable<Array<Post>>{
+    return this.httpClient.get<Array<Post>>(BACKEND_URL+"/posts/getPostsBySection",{params:{sectionId:id}});
+  }
+
   create(post:Post){
     console.log(post);
     let httpHeaders:HttpHeaders=new HttpHeaders();
@@ -29,5 +33,9 @@ export class PostService {
 
   get(id:number):Observable<Post>{
     return  this.httpClient.get<Post>(BACKEND_URL+"/posts/"+id);
+  }
+
+  remove(id:number):Observable<any>{
+    return this.httpClient.delete(BACKEND_URL+"/posts",{params:{postId:id}});
   }
 }

@@ -19,9 +19,11 @@ export class AuthService implements OnInit{
 
   private login:string="";
   private  token:string="";
+  private role:string="";
   constructor(private httpClient:HttpClient,private route:Router,private localStorageService:LocalStorageService) {
     this.login=this.localStorageService.getKey("user")+"";
     this.token=this.localStorageService.getKey("token")+"";
+    this.role=this.localStorageService.getKey("role")+"";
   }
 
   authErrorHandler:EventEmitter<string>=new EventEmitter<string>();
@@ -32,8 +34,8 @@ export class AuthService implements OnInit{
     const token: string = this.createAuthToken(username, password);
     let headers:HttpHeaders=new HttpHeaders({Authorization:token})
 
-   this.httpClient.get(BACKEND_URL+"/posts",{headers,responseType:'text' as 'json'}).subscribe(e=> {
-       this.registerAuthData(token,username);
+   this.httpClient.get<string>(BACKEND_URL+"/role",{headers,responseType:'text' as 'json'}).subscribe(e=> {
+       this.registerAuthData(token,username,e);
    },
      error => {
        this.authErrorHandler.emit("login error")
@@ -45,14 +47,19 @@ export class AuthService implements OnInit{
     return 'Basic '+window.btoa(username+":"+password);
   }
 
-  registerAuthData(token:string,username:string){
+  registerAuthData(token:string,username:string,role:string){
     this.token=token;
     this.login=username;
-    this.localStorageService.add(["user",this.login],["token",this.token]).subscribe(
+    this.role = role;
+    this.localStorageService.add(["user",this.login],["token",this.token],["role",this.role]).subscribe(
       e=>this.route.navigate(["/"])
 
     );
 
+  }
+
+  hasAdminRole():boolean{
+    return this.localStorageService.getKey("role")==="admin";
   }
 
   register(username:string,password:string){

@@ -5,6 +5,7 @@
   <a href="/register" *ngIf="!isAuthorized">register</a>
   <a href="/post/create" *ngIf="isAuthorized">create post</a>
   <a href="" (click)="logout()" *ngIf="isAuthorized">logout</a>
+  <a href="/section/create" *ngIf="isAdmin()">create section</a>
 </nav>
 <router-outlet>
 

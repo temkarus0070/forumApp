@@ -13,9 +13,12 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import {AuthInterceptor} from "./interceptors/AuthInterceptor";
 import {PostResolver} from "./resolvers/postResolver";
+import { SectionCreateComponent } from './pages/section/section-create/section-create.component';
+import { SectionIndexComponent } from './pages/section/section-index/section-index.component';
 
 export const routes:Routes=[{path:"login",component:AuthPageComponent},{path:"register", component:RegisterPageComponent},{path:"post/create",component:PostCreatePageComponent},
-  {path:"",component:HomePageComponent},{path:"posts/:id",component:ShowPostPageComponent,resolve:{"post":PostResolver}}];
+  {path:"",component:HomePageComponent},{path:"posts/:id",component:ShowPostPageComponent,resolve:{"post":PostResolver}},{path:"post/:id",component:IndexPostPageComponent},
+  {path:"section/create",component:SectionCreateComponent}];
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ export const routes:Routes=[{path:"login",component:AuthPageComponent},{path:"re
     IndexPostPageComponent,
     AuthPageComponent,
     RegisterPageComponent,
-    HomePageComponent
+    HomePageComponent,
+    SectionCreateComponent,
+    SectionIndexComponent
   ],
   imports: [
     BrowserModule,
