@@ -3,9 +3,10 @@
   <div class="name">
   <label for="name">name</label>
   <input [formControl]="nameControl" type="text" id="name">
+    <p *ngIf="nameControl.hasError('required')" class="requiredError">section name is required</p>
   </div>
   <div>
-  <input type="button" class="createBtn" value="create section" (click)="create()">
+  <input [disabled]="nameControl.hasError('required')" type="button" class="createBtn" value="create section" (click)="create()">
   </div>
 </form>
 </div>

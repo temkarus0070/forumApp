@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {SectionService} from "../../../services/sectionService";
 import {Section} from "../../../models/Section";
 import {Router} from "@angular/router";
@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./section-create.component.css']
 })
 export class SectionCreateComponent implements OnInit {
-  public nameControl:FormControl=new FormControl();
+  public nameControl:FormControl=new FormControl("",[Validators.required]);
   public formGroup:FormGroup=new FormGroup({"name":this.nameControl});
 
   create(){

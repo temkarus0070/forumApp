@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SectionService} from "../../../services/sectionService";
 import {Section} from "../../../models/Section";
 import {Router} from "@angular/router";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Post} from "../../../models/post";
 import {PostService} from "../../../services/post.service";
 
@@ -15,17 +15,15 @@ export class PostCreatePageComponent implements OnInit {
 
 
   public availableSections:Array<Section>=[];
-  headerControl:FormControl=new FormControl();
-  textControl:FormControl=new FormControl();
-  sectionControl:FormControl=new FormControl();
+  headerControl:FormControl=new FormControl("",[Validators.required]);
+  textControl:FormControl=new FormControl("",[Validators.required]);
+  sectionControl:FormControl=new FormControl("",[Validators.required]);
   formGroup:FormGroup=new FormGroup({"text":this.textControl,"section":this.sectionControl,"header":this.headerControl});
 
   constructor(private sectionService:SectionService,private router:Router,private postService:PostService) {
     router.events.subscribe(e=>{
       sectionService.load().subscribe(
         e=> {
-          console.log("sections downloaded")
-          console.log(e);
           this.availableSections = e
         }
       )
@@ -35,6 +33,11 @@ export class PostCreatePageComponent implements OnInit {
 
 
   ngOnInit(): void {
+  }
+
+  hasErrors():boolean{
+    return this.sectionControl.hasError('required')||this.headerControl.hasError('required')
+    || this.textControl.hasError('required');
   }
 
   createPost(){
