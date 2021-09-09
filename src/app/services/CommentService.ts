@@ -12,20 +12,20 @@ export class CommentService{
   }
 
   load():Observable<Array<Comment>>{
-    return this.httpService.get<Array<Comment>>(BACKEND_URL+"/comment");
+    return this.httpService.get<Array<Comment>>(BACKEND_URL+"/comments");
   }
 
   delete(commentId:number){
     let httpHeaders:HttpHeaders=new HttpHeaders();
     httpHeaders.set("commentId",String(commentId));
-    this.httpService.delete(BACKEND_URL+"/comment",{headers:httpHeaders,params:{'commentId':commentId}}).subscribe(e=>{
+    this.httpService.delete(BACKEND_URL+"/comments",{headers:httpHeaders,params:{'commentId':commentId}}).subscribe(e=>{
 
     },
       error => {console.log(error)})
   }
 
   create(comment:Comment){
-    this.httpService.post(BACKEND_URL+"/comment/new",comment).subscribe(e=>{},
+    this.httpService.post(BACKEND_URL+"/comments",comment).subscribe(e=>{},
       error => console.log(error));
   }
 }

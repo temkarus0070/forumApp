@@ -22,7 +22,7 @@ export class PostService {
     console.log(post);
     let httpHeaders:HttpHeaders=new HttpHeaders();
     httpHeaders.set("Content-Type","application/json");
-    this.httpClient.post(BACKEND_URL+"/posts/new",JSON.stringify(post),{  headers:httpHeaders}).subscribe(e=>{},error => {
+    this.httpClient.post(BACKEND_URL+"/posts",JSON.stringify(post),{  headers:httpHeaders}).subscribe(e=>{},error => {
       console.log(error);
     })
   }

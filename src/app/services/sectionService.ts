@@ -16,7 +16,7 @@ export class SectionService{
   }
 
   create(section:Section){
-    this.httpClient.post(BACKEND_URL+"/sections/new",section).subscribe(
+    this.httpClient.post(BACKEND_URL+"/sections",section).subscribe(
       next=>{},
       error => {
         console.log(error);
