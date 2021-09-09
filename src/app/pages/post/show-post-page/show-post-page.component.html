@@ -1,20 +1,9 @@
-<header>
-  <h2>{{post.header}}</h2>
-</header>
-<div>
-  <pre>{{post.text}}</pre>
+<div id="postContainer">
+<app-post *ngIf="post.user!= undefined " [text]="post.text" [author]="post.user.username" [header]="post.header" [date]="post.date">
 
-</div>
-<div>
+</app-post>
+  <app-comments [comments]="post.comments" [postId]="post.id" >
 
-    <input [(ngModel)]="comment" type="text">
-    <input (click)="createComment()"  type="button" value="comment">
-</div>
-<div id="comments" *ngFor="let comment of post.comments">
-  <div class="comment">
-    <p>{{comment.user?.username}}</p>
-  <p>{{comment.text}}</p>
-    <button (click)="deleteComment(comment.id)">remove</button>
-  </div>
+  </app-comments>
 
 </div>

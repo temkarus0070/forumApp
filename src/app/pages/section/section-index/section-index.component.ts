@@ -41,7 +41,7 @@ export class SectionIndexComponent implements OnInit {
         },
         error => {
           console.log(error);
-        });;
+        });
   }
 
 }

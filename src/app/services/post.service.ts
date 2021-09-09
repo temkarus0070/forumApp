@@ -14,28 +14,28 @@ export class PostService {
 
   load():Observable<Array<Post>>{
 
-    return this.httpClient.get<Array<Post>>(BACKEND_URL+"/posts");
+    return this.httpClient.get<Array<Post>>(BACKEND_URL+"/post");
 
   }
 
   loadBySection(id:number):Observable<Array<Post>>{
-    return this.httpClient.get<Array<Post>>(BACKEND_URL+"/posts/getPostsBySection",{params:{sectionId:id}});
+    return this.httpClient.get<Array<Post>>(BACKEND_URL+"/post/getPostsBySection",{params:{sectionId:id}});
   }
 
   create(post:Post){
     console.log(post);
     let httpHeaders:HttpHeaders=new HttpHeaders();
     httpHeaders.set("Content-Type","application/json");
-    this.httpClient.post(BACKEND_URL+"/posts",JSON.stringify(post),{  headers:httpHeaders}).subscribe(e=>{},error => {
+    this.httpClient.post(BACKEND_URL+"/post",JSON.stringify(post),{  headers:httpHeaders}).subscribe(e=>{},error => {
       console.log(error);
     })
   }
 
   get(id:number):Observable<Post>{
-    return  this.httpClient.get<Post>(BACKEND_URL+"/posts/"+id);
+    return  this.httpClient.get<Post>(BACKEND_URL+"/post/"+id);
   }
 
   remove(id:number):Observable<any>{
-    return this.httpClient.delete(BACKEND_URL+"/posts",{params:{postId:id}});
+    return this.httpClient.delete(BACKEND_URL+"/post",{params:{postId:id}});
   }
 }

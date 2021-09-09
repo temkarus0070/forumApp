@@ -1,0 +1,13 @@
+<div>
+
+  <input [(ngModel)]="text" type="text">
+  <input (click)="addNewComment()"  type="button" value="comment">
+</div>
+<div id="comments" *ngFor="let comment of comments">
+  <div class="comment">
+    <p>{{comment.user?.username}}</p>
+    <p>{{comment.text}}</p>
+    <button *ngIf="canDeleteComment(comment)" (click)="deleteCommentFromPost(comment.id)">remove</button>
+  </div>
+
+</div>

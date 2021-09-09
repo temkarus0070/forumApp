@@ -15,6 +15,8 @@ import {AuthInterceptor} from "./interceptors/AuthInterceptor";
 import {PostResolver} from "./resolvers/postResolver";
 import { SectionCreateComponent } from './pages/section/section-create/section-create.component';
 import { SectionIndexComponent } from './pages/section/section-index/section-index.component';
+import { PostComponent } from './components/post/post.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 export const routes:Routes=[{path:"login",component:AuthPageComponent},{path:"register", component:RegisterPageComponent},{path:"post/create",component:PostCreatePageComponent},
   {path:"",component:HomePageComponent},{path:"posts/:id",component:ShowPostPageComponent,resolve:{"post":PostResolver}},{path:"post/:id",component:IndexPostPageComponent},
@@ -30,7 +32,9 @@ export const routes:Routes=[{path:"login",component:AuthPageComponent},{path:"re
     RegisterPageComponent,
     HomePageComponent,
     SectionCreateComponent,
-    SectionIndexComponent
+    SectionIndexComponent,
+    PostComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,

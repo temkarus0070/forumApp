@@ -5,5 +5,5 @@ export interface Comment{
   id:number,
   user:User|null;
   text:string;
-  post:Post
+  post:Post|null
 }

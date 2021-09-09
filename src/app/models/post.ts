@@ -5,7 +5,7 @@ import {Comment} from "./comment";
 export interface Post {
   id:number;
   header:string;
-  author:User|null;
+  user:User|null;
   date:Date;
   section:Section|null;
   text:string;

@@ -12,23 +12,14 @@ export class SectionService{
   }
 
   load():Observable<Array<Section>>{
-    return  this.httpClient.get<Array<Section>>(BACKEND_URL+"/sections");
+    return  this.httpClient.get<Array<Section>>(BACKEND_URL+"/section");
   }
 
-  create(section:Section){
-    this.httpClient.post(BACKEND_URL+"/sections",section).subscribe(
-      next=>{},
-      error => {
-        console.log(error);
-      }
-    );
+  create(section:Section):Observable<any> {
+    return this.httpClient.post(BACKEND_URL + "/section", section);
   }
 
-  delete(section:Section){
-    this.httpClient.delete(BACKEND_URL+"/sections",{params:{sectionId:section.id}})
-      .subscribe(e=>{},
-        error => {
-        console.log(error);
-        });
+  delete(sectionId:number):Observable<any>{
+    return  this.httpClient.delete(BACKEND_URL+"/section",{params:{sectionId:sectionId}})
   }
 }

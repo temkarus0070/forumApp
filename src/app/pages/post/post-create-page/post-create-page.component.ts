@@ -40,7 +40,7 @@ export class PostCreatePageComponent implements OnInit {
   createPost(){
     let post:Post={
       text:this.textControl.value,
-      author:null,
+      user:null,
       header:this.headerControl.value,
       section:{
         id:Number(this.sectionControl.value),
