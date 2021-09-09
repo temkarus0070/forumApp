@@ -1,0 +1,6 @@
+<ul *ngFor="let section of sections">
+  <li>
+    <a  [routerLink]="['post',section.id]">{{section.name}}</a>
+    <input *ngIf="isAdmin()" type="button" value="delete" (click)="remove(section.id)">
+  </li> 
+</ul>
