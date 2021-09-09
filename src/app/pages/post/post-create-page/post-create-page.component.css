@@ -2,3 +2,27 @@
   display: flex;
   flex-direction: column;
 }
+
+
+
+#form fieldset input,textarea{
+  width: 100%;
+}
+
+
+
+#buttonContainer .postCreateBtn{
+display: flex;
+justify-content: center;
+justify-items: center;
+}
+
+.postCreateBtn{
+  width: 10% !important;
+  margin: 0 auto;
+}
+
+fieldset{
+  border:none;
+  margin-bottom: 1%;
+}

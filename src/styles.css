@@ -29,3 +29,18 @@
 a:hover{
   background-color: yellow;
 }
+
+.createBtn{
+  font-weight: bold;
+  border-radius: 15px;
+  background-color: royalblue;
+}
+
+.createBtn :hover{
+  background-color: burlywood;
+}
+
+
+nav{
+  margin-bottom: 60px;
+}

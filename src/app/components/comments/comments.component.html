@@ -1,7 +1,7 @@
 <div>
 
   <input [(ngModel)]="text" type="text">
-  <input (click)="addNewComment()"  type="button" value="comment">
+  <input class="createBtn" (click)="addNewComment()"  type="button" value="comment">
 </div>
 <div id="comments" *ngFor="let comment of comments">
   <div class="comment">

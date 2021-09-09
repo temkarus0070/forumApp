@@ -73,9 +73,10 @@ export class AuthService implements OnInit{
   }
 
   logout(){
-    this.localStorageService.remove("user","token").subscribe(e=> {
+    this.localStorageService.remove("user","token","role").subscribe(e=> {
       this.login = ""
     this.token="";
+      this.role="";
       this.route.navigateByUrl("/login");
     });
   }
