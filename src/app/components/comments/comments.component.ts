@@ -3,6 +3,7 @@ import {CommentService} from "../../services/CommentService";
 import {Comment} from "../../models/comment";
 import {Post} from "../../models/post";
 import {AuthService} from "../../services/auth.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-comments',
@@ -10,8 +11,9 @@ import {AuthService} from "../../services/auth.service";
   styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent implements OnInit {
+  public textControl:FormControl=new FormControl("",[Validators.required]);
+  public formGroup:FormGroup=new FormGroup({"text":this.textControl});
 
-  text:String="";
   @Input("postId")postId:number=0;
   @Input("comments") comments:Array<Comment>=[];
 
@@ -25,7 +27,7 @@ export class CommentsComponent implements OnInit {
   }
 
   addNewComment(){
-    let comment:Comment={text:this.text,post:{id:this.postId} as Post,user:{username:this.authService.getUsername()} } as Comment ;
+    let comment:Comment={text:this.textControl.value,post:{id:this.postId} as Post,user:{username:this.authService.getUsername()} } as Comment ;
     this.commentService.create(comment);
     this.comments.push(comment);
   }

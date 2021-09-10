@@ -1,7 +1,9 @@
 <div>
 
-  <input [(ngModel)]="text" type="text">
-  <input class="createBtn" (click)="addNewComment()"  type="button" value="comment">
+  <form [formGroup]="formGroup" ></form>
+  <input  [formControl]="textControl" type="text">
+  <p *ngIf="textControl.hasError('required')" class="requiredError">comment text is required</p>
+  <input style="display: block;" [disabled]="textControl.hasError('required')" class="createBtn" (click)="addNewComment()"  type="button" value="comment">
 </div>
 <div id="comments" *ngFor="let comment of comments">
   <div class="comment">

@@ -26,3 +26,14 @@ fieldset{
   border:none;
   margin-bottom: 1%;
 }
+
+#buttonContainer{
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+
+#buttonContainer input{
+  margin:0 auto;
+  width: 10% !important;
+}
