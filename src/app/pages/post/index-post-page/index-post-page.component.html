@@ -3,9 +3,9 @@
   <li *ngFor="let post of posts">
     <div>
       <a routerLink="/posts/{{post.id}}">{{post.header}}</a>
-      <p>{{post.text | escape}}</p>
+      <p>{{post.text | escape | slice:0:300}} <span *ngIf="post.text.length>300">...</span></p>
       <p>{{post.date | date}}</p>
-      <button class="deleteBtn" *ngIf="isAdmin()" (click)="remove(post.id)">delete</button>
+      <button class="deleteBtn" *ngIf="isAdmin()||isAuthor(post)" (click)="remove(post.id)">delete</button>
     </div>
   </li>
 </ul>

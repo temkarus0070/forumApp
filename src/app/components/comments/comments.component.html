@@ -1,15 +1,18 @@
+<div id="commentsContainer">
 <div>
 
   <form [formGroup]="formGroup" ></form>
-  <input  [formControl]="textControl" type="text">
+  <textarea rows="10" cols="50"  [formControl]="textControl" type="text"> </textarea>
   <p *ngIf="textControl.hasError('required')" class="requiredError">comment text is required</p>
   <input style="display: block;" [disabled]="textControl.hasError('required')" class="createBtn" (click)="addNewComment()"  type="button" value="comment">
+</div>
 </div>
 <div id="comments" *ngFor="let comment of comments">
   <div class="comment">
     <p id="authorName">{{comment.user?.username}}</p>
-    <p>{{comment.text}}</p>
+    <p>{{comment.text | escape}}</p>
     <button class="deleteBtn" *ngIf="canDeleteComment(comment)" (click)="deleteCommentFromPost(comment.id)">remove</button>
   </div>
 
 </div>
+

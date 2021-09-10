@@ -27,7 +27,7 @@ export class CommentsComponent implements OnInit {
   }
 
   addNewComment(){
-    let comment:Comment={text:this.textControl.value,post:{id:this.postId} as Post,user:{username:this.authService.getUsername()} } as Comment ;
+    let comment:Comment={text:this.repairTextFromQuoutes(this.textControl.value),post:{id:this.postId} as Post,user:{username:this.authService.getUsername()} } as Comment ;
     this.commentService.create(comment);
     this.comments.push(comment);
   }
@@ -38,6 +38,10 @@ export class CommentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  repairTextFromQuoutes(text:string):string{
+    return text.replace(/"/g, '\\"');
   }
 
 }

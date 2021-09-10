@@ -20,7 +20,7 @@ import { CommentsComponent } from './components/comments/comments.component';
 import {EscapePipe} from "./pipes/EscapePipe";
 
 export const routes:Routes=[{path:"login",component:AuthPageComponent},{path:"register", component:RegisterPageComponent},{path:"post/create",component:PostCreatePageComponent},
-  {path:"",component:HomePageComponent},{path:"posts/:id",component:ShowPostPageComponent,resolve:{"post":PostResolver}},{path:"post/:id",component:IndexPostPageComponent},
+  {path:"",component:HomePageComponent},{path:"posts/:id",component:ShowPostPageComponent,resolve:{"post":PostResolver}},{path:"sections/:id",component:IndexPostPageComponent},
   {path:"section/create",component:SectionCreateComponent}];
 
 @NgModule({

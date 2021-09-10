@@ -54,6 +54,10 @@ this.router.events.subscribe(e=>{
     return this.authService.hasAdminRole();
   }
 
+  isAuthor(post:Post):boolean{
+    return post.user?.username===this.authService.getUsername();
+  }
+
   remove(id:number):void{
     this.postService.remove(id).subscribe(e=>{
       this.loadPosts(this.sectionId as number);

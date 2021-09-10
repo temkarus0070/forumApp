@@ -27,7 +27,7 @@ export class PostService {
     let httpHeaders:HttpHeaders=new HttpHeaders();
     httpHeaders.set("Content-Type","application/json");
     this.httpClient.post(BACKEND_URL+"/post",JSON.stringify(post),{  headers:httpHeaders}).subscribe(e=>{
-      this.router.navigateByUrl("/");
+      this.router.navigateByUrl(`/sections/${post.section?.id}`);
     },error => {
       console.log(error);
     })

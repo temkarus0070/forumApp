@@ -41,6 +41,7 @@ export class PostCreatePageComponent implements OnInit {
   }
 
   createPost(){
+    console.log(this.repairTextFromQuoutes(this.textControl.value));
     let post:Post={
       text:this.repairTextFromQuoutes(this.textControl.value),
       user:null,
