@@ -34,9 +34,14 @@ export class ShowPostPageComponent implements OnInit {
 
   }
 
+  loadPostByTimeout(){
+    setInterval(()=>this.loadPost(),1000);
+  }
+
   loadPost(){
-    console.log("Load")
-    this.postService.get(this.post.id).subscribe(e=>this.post=e)
+      this.postService.get(this.post.id).subscribe(e=>this.post=e);
+
+
   }
 
   createComment(){

@@ -16,6 +16,7 @@ export class CommentsComponent implements OnInit {
 
   @Input("postId")postId:number=0;
   @Input("comments") comments:Array<Comment>=[];
+  @Output("addComment") addComment:EventEmitter<any>=new EventEmitter<any>();
 
 
   constructor(private commentService:CommentService,private authService:AuthService) {
@@ -29,7 +30,8 @@ export class CommentsComponent implements OnInit {
   addNewComment(){
     let comment:Comment={text:this.repairTextFromQuoutes(this.textControl.value),post:{id:this.postId} as Post,user:{username:this.authService.getUsername()} } as Comment ;
     this.commentService.create(comment);
-    this.comments.push(comment);
+    this.addComment.emit("");
+
   }
 
   deleteCommentFromPost(commentId:number){

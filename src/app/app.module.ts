@@ -18,9 +18,11 @@ import { SectionIndexComponent } from './pages/section/section-index/section-ind
 import { PostComponent } from './components/post/post.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import {EscapePipe} from "./pipes/EscapePipe";
+import {SectionsResolver} from "./resolvers/sectionsResolver";
+import {PostsResolver} from "./resolvers/postsResolver";
 
 export const routes:Routes=[{path:"login",component:AuthPageComponent},{path:"register", component:RegisterPageComponent},{path:"post/create",component:PostCreatePageComponent},
-  {path:"",component:HomePageComponent},{path:"posts/:id",component:ShowPostPageComponent,resolve:{"post":PostResolver}},{path:"sections/:id",component:IndexPostPageComponent},
+  {path:"",component:SectionIndexComponent,resolve:{"sections":SectionsResolver}},{path:"posts/:id",component:ShowPostPageComponent,resolve:{"post":PostResolver}},{path:"sections/:id",component:IndexPostPageComponent,resolve:{"posts":PostsResolver}},
   {path:"section/create",component:SectionCreateComponent}];
 
 @NgModule({

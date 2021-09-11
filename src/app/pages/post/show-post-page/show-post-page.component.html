@@ -2,7 +2,7 @@
 <app-post *ngIf="post.user!= undefined " [text]="post.text | escape" [author]="post.user.username" [header]="post.header" [date]="post.date">
 
 </app-post>
-  <app-comments [comments]="post.comments" [postId]="post.id" >
+  <app-comments (addComment)="loadPostByTimeout()" [comments]="post.comments" [postId]="post.id" >
 
   </app-comments>
 

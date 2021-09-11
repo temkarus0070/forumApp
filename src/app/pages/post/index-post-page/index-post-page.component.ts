@@ -15,15 +15,10 @@ export class IndexPostPageComponent implements OnInit {
   posts:Array<Post>=new Array<Post>();
 
   constructor(private postService:PostService,private router:Router,private routerHandler:ActivatedRoute,private authService:AuthService) {
+    this.routerHandler.data.subscribe(e=>{
+      this.posts=e.posts;
+    })
 
-this.router.events.subscribe(e=>{
-  this.routerHandler.params.subscribe(e=>{
-    this.sectionId=e.id;
-    this.loadPosts(e.id);
-  })
-
-
-})
   }
 
 
@@ -60,7 +55,7 @@ this.router.events.subscribe(e=>{
 
   remove(id:number):void{
     this.postService.remove(id).subscribe(e=>{
-      this.loadPosts(this.sectionId as number);
+      this.posts=this.posts.filter(e=>e.id!=id);
     },
       error => {
       console.log(error)

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SectionService} from "../../../services/sectionService";
-import {Router} from "@angular/router";
+import {ActivatedRoute, ActivatedRouteSnapshot, Router} from "@angular/router";
 import {Section} from "../../../models/Section";
 import {AuthService} from "../../../services/auth.service";
 
@@ -12,9 +12,12 @@ import {AuthService} from "../../../services/auth.service";
 export class SectionIndexComponent implements OnInit {
   public sections:Array<Section>=[];
 
-  constructor(private sectionService:SectionService,private router:Router,private authService:AuthService) {
+  constructor(private sectionService:SectionService,private router:Router,private authService:AuthService,private routerHandler:ActivatedRoute) {
+    this.routerHandler.data.subscribe(e=>{
+      this.sections=e.sections;
+    })
     this.router.events.subscribe(e=>{
-      this.load();
+    //  this.load();
     })
   }
 
