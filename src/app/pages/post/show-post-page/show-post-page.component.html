@@ -1,5 +1,5 @@
 <div id="postContainer">
-<app-post *ngIf="post.user!= undefined " [text]="post.text | escape" [author]="post.user.username" [header]="post.header" [date]="post.date">
+<app-post *ngIf="post.user!= undefined " [post]="post">
 
 </app-post>
   <app-comments (addComment)="loadPostByTimeout()" [comments]="post.comments" [postId]="post.id" >

@@ -28,4 +28,8 @@ export class CommentService{
     this.httpService.post(BACKEND_URL+"/comment",comment).subscribe(e=>{},
       error => console.log(error));
   }
+
+  update(comment:Comment):Observable<any>{
+    return this.httpService.put(BACKEND_URL+"/comment",comment);
+  }
 }

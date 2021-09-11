@@ -10,7 +10,12 @@
 <div id="comments" *ngFor="let comment of comments">
   <div class="comment">
     <p id="authorName">{{comment.user?.username}}</p>
-    <p>{{comment.text | escape}}</p>
+    <p *ngIf="isUserCommentsUnderEditingMap.get(comment)===false || isUserCommentsUnderEditingMap.get(comment)===undefined">{{comment.text | escape}}</p>
+    <textarea *ngIf="isUserCommentsUnderEditingMap.get(comment)" cols="20" rows="10" (change)="updateComment($event,comment)">{{comment.text}}</textarea>
+    <button class="editBtn" *ngIf="(isUserCommentsUnderEditingMap.get(comment)===false || isUserCommentsUnderEditingMap.get(comment)===undefined) && isAuthor(comment)" (click)="setEditFlag(comment)">edit</button>
+    <button class="editBtn" *ngIf="isUserCommentsUnderEditingMap.get(comment)" (click)="saveComment(comment)">update</button>
+    <button class="editBtn" *ngIf="isUserCommentsUnderEditingMap.get(comment)" (click)="cancelUpdate(comment)">cancel update</button>
+
     <button class="deleteBtn" *ngIf="canDeleteComment(comment)" (click)="deleteCommentFromPost(comment.id)">remove</button>
   </div>
 

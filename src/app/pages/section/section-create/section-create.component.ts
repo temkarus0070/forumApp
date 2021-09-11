@@ -16,7 +16,8 @@ export class SectionCreateComponent implements OnInit {
   create(){
     let section:Section={
       name:this.nameControl.value,
-      id:0
+      id:0,
+      posts:[]
     };
     this.sectionService.create(section).subscribe(
       next=>{

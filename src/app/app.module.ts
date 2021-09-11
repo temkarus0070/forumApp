@@ -20,10 +20,11 @@ import { CommentsComponent } from './components/comments/comments.component';
 import {EscapePipe} from "./pipes/EscapePipe";
 import {SectionsResolver} from "./resolvers/sectionsResolver";
 import {PostsResolver} from "./resolvers/postsResolver";
+import { PostUpdateComponent } from './pages/post/post-update/post-update.component';
 
-export const routes:Routes=[{path:"login",component:AuthPageComponent},{path:"register", component:RegisterPageComponent},{path:"post/create",component:PostCreatePageComponent},
+export const routes:Routes=[{path:"login",component:AuthPageComponent},{path:"register", component:RegisterPageComponent},{path:"post/create",component:PostCreatePageComponent,resolve:{"sections":SectionsResolver}},
   {path:"",component:SectionIndexComponent,resolve:{"sections":SectionsResolver}},{path:"posts/:id",component:ShowPostPageComponent,resolve:{"post":PostResolver}},{path:"sections/:id",component:IndexPostPageComponent,resolve:{"posts":PostsResolver}},
-  {path:"section/create",component:SectionCreateComponent}];
+  {path:"section/create",component:SectionCreateComponent},{path:"post/edit",component:PostUpdateComponent,resolve:{"sections":SectionsResolver}}];
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ export const routes:Routes=[{path:"login",component:AuthPageComponent},{path:"re
     SectionIndexComponent,
     PostComponent,
     CommentsComponent,
-    EscapePipe
+    EscapePipe,
+    PostUpdateComponent
   ],
   imports: [
     BrowserModule,

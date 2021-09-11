@@ -11,6 +11,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
   styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent implements OnInit {
+  public userCommentsUnderEditing:Map<Comment,string>=new Map<Comment, string>();
+  public isUserCommentsUnderEditingMap:Map<Comment, boolean>=new Map<Comment, boolean>()
   public textControl:FormControl=new FormControl("",[Validators.required]);
   public formGroup:FormGroup=new FormGroup({"text":this.textControl});
 
@@ -21,6 +23,31 @@ export class CommentsComponent implements OnInit {
 
   constructor(private commentService:CommentService,private authService:AuthService) {
 
+  }
+
+  setEditFlag(comment:Comment){
+    this.isUserCommentsUnderEditingMap.set(comment,true);
+    this.userCommentsUnderEditing.set(comment,comment.text);
+  }
+
+  updateComment(event:any,comment:Comment){
+    this.userCommentsUnderEditing.set(comment,event.target.value);
+  }
+
+  saveComment(comment:Comment){
+    comment.text=this.userCommentsUnderEditing.get(comment) || comment.text;
+    this.commentService.update(comment).subscribe(e=>{
+      this.cancelUpdate(comment);
+    });
+  }
+
+  isAuthor(comment:Comment){
+    return comment.user?.username===this.authService.getUsername();
+  }
+
+  cancelUpdate(comment:Comment){
+    this.isUserCommentsUnderEditingMap.set(comment,false);
+    this.userCommentsUnderEditing.delete(comment);
   }
 
   canDeleteComment(comment:Comment):boolean{

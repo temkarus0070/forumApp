@@ -1,10 +1,11 @@
-<div>
-  <h2>{{header}}</h2>
+<div *ngIf="post">
+  <h2>{{post.header}}</h2>
+  <button class="editBtn" *ngIf="isItCurrentUserPost()" (click)="editPost()">edit</button>
   <div id="postData">
-    <p id="authorName">{{author}}</p>
-    <p>{{date | date}}</p>
+    <p id="authorName">{{post?.user?.username}}</p>
+    <p>{{post.date | date}}</p>
   </div>
   <div id="postProperty">
-    <p>{{text}}</p>
+    <p *ngIf="post.user!=null">{{post.text | escape}}</p>
   </div>
 </div>

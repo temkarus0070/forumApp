@@ -33,6 +33,16 @@ export class PostService {
     })
   }
 
+  update(post:Post){
+    let httpHeaders:HttpHeaders=new HttpHeaders();
+    httpHeaders.set("Content-Type","application/json");
+    this.httpClient.put(BACKEND_URL+"/post",JSON.stringify(post),{  headers:httpHeaders}).subscribe(e=>{
+      this.router.navigateByUrl(`/sections/${post.section?.id}`);
+    },error => {
+      console.log(error);
+    })
+  }
+
   get(id:number):Observable<Post>{
     return  this.httpClient.get<Post>(BACKEND_URL+"/post/"+id);
   }
@@ -40,4 +50,6 @@ export class PostService {
   remove(id:number):Observable<any>{
     return this.httpClient.delete(BACKEND_URL+"/post",{params:{postId:id}});
   }
+
+
 }
