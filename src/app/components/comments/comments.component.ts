@@ -56,9 +56,22 @@ export class CommentsComponent implements OnInit {
 
   addNewComment(){
     let comment:Comment={text:this.repairTextFromQuoutes(this.textControl.value),post:{id:this.postId} as Post,user:{username:this.authService.getUsername()} } as Comment ;
-    this.commentService.create(comment);
+    this.commentService.create(comment).subscribe(e=>
+    this.comments.push(e),
+      error => {
+      console.log("comment error");
+      });
+
     this.addComment.emit("");
 
+  }
+
+  checkBug(comment:Comment){
+    console.log("bug check");
+
+    console.log(this.isUserCommentsUnderEditingMap.get(comment)===false);
+    console.log(this.isUserCommentsUnderEditingMap.get(comment)===undefined);
+    console.log(this.isAuthor(comment));
   }
 
   deleteCommentFromPost(commentId:number){

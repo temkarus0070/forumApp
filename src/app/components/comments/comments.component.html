@@ -13,7 +13,8 @@
     <p *ngIf="isUserCommentsUnderEditingMap.get(comment)===false || isUserCommentsUnderEditingMap.get(comment)===undefined">{{comment.text | escape}}</p>
     <textarea *ngIf="isUserCommentsUnderEditingMap.get(comment)" cols="60" rows="5" (change)="updateComment($event,comment)">{{comment.text}}</textarea>
     <div id="commentsButton">
-    <button class="editBtn" *ngIf="(isUserCommentsUnderEditingMap.get(comment)===false || isUserCommentsUnderEditingMap.get(comment)===undefined) && isAuthor(comment)" (click)="setEditFlag(comment)">edit</button>
+    <button class="editBtn" *ngIf="(isUserCommentsUnderEditingMap.get(comment)===false || isUserCommentsUnderEditingMap.get(comment)===undefined) && isAuthor(comment)"
+            (click)="setEditFlag(comment)">edit</button>
     <button class="editBtn" *ngIf="isUserCommentsUnderEditingMap.get(comment)" (click)="saveComment(comment)">update</button>
     <button class="editBtn" *ngIf="isUserCommentsUnderEditingMap.get(comment)" (click)="cancelUpdate(comment)">cancel update</button>
 

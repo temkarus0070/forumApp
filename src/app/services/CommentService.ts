@@ -24,9 +24,8 @@ export class CommentService{
       error => {console.log(error)})
   }
 
-  create(comment:Comment){
-    this.httpService.post(BACKEND_URL+"/comment",comment).subscribe(e=>{},
-      error => console.log(error));
+  create(comment:Comment):Observable<Comment>{
+   return this.httpService.post<Comment>(BACKEND_URL+"/comment",comment);
   }
 
   update(comment:Comment):Observable<any>{
