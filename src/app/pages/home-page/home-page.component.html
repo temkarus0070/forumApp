@@ -1,3 +1,12 @@
+<ng-form id="searchForm" [formGroup]="searchFormGroup">
+  <label for="searchTitle">Title</label>
+  <input  [formControl]="titleForSearch" id="searchTitle" type="text"/>
+</ng-form>
 <app-section-index>
-
 </app-section-index>
+<app-index-post-page *ngIf="posts"  [posts]="posts"></app-index-post-page>
+
+
+
+
+

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Post} from "../../../models/post";
 import {PostService} from "../../../services/post.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../services/auth.service";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-index-post-page',
@@ -12,20 +13,31 @@ import {AuthService} from "../../../services/auth.service";
 export class IndexPostPageComponent implements OnInit {
   sectionId:number|null=null;
 
+
+  @Input()
   posts:Array<Post>=new Array<Post>();
 
+
   constructor(private postService:PostService,private router:Router,private routerHandler:ActivatedRoute,private authService:AuthService) {
-    this.routerHandler.data.subscribe(e=>{
-      this.posts=e.posts;
+    this.routerHandler.data.subscribe(e=> {
+      this.posts = e.posts;
+      if (this.posts) {
+
+      this.sectionId = Number(this.posts[0].section?.id);
+    }
     })
 
   }
 
 
 
+
+
+
   ngOnInit(): void {
 
   }
+
 
   loadPosts(sectionId?:number) {
     if(sectionId) {

@@ -21,10 +21,13 @@ import {EscapePipe} from "./pipes/EscapePipe";
 import {SectionsResolver} from "./resolvers/sectionsResolver";
 import {PostsResolver} from "./resolvers/postsResolver";
 import { PostUpdateComponent } from './pages/post/post-update/post-update.component';
+import {UserPostsCountResolver} from "./resolvers/user-posts-count-resolver.service";
+import {CountBySectionResolver} from "./resolvers/count-by-section.resolver";
+import { UserPageComponent } from './pages/user-page/user-page.component';
 
 export const routes:Routes=[{path:"login",component:AuthPageComponent},{path:"register", component:RegisterPageComponent},{path:"post/create",component:PostCreatePageComponent,resolve:{"sections":SectionsResolver}},
-  {path:"",component:SectionIndexComponent,resolve:{"sections":SectionsResolver}},{path:"posts/:id",component:ShowPostPageComponent,resolve:{"post":PostResolver}},{path:"sections/:id",component:IndexPostPageComponent,resolve:{"posts":PostsResolver}},
-  {path:"section/create",component:SectionCreateComponent},{path:"post/edit",component:PostUpdateComponent,resolve:{"sections":SectionsResolver}}];
+  {path:"",component:HomePageComponent,resolve:{"sections":SectionsResolver}},{path:"posts/:id",component:ShowPostPageComponent,resolve:{"post":PostResolver}},{path:"sections/:id",component:IndexPostPageComponent,resolve:{"posts":PostsResolver,"count":CountBySectionResolver}},
+  {path:"section/create",component:SectionCreateComponent},{path:"post/edit",component:PostUpdateComponent,resolve:{"sections":SectionsResolver}},{component:UserPageComponent,path:"user/:username",resolve:{postsCount:UserPostsCountResolver}}];
 
 @NgModule({
   declarations: [
@@ -40,7 +43,8 @@ export const routes:Routes=[{path:"login",component:AuthPageComponent},{path:"re
     PostComponent,
     CommentsComponent,
     EscapePipe,
-    PostUpdateComponent
+    PostUpdateComponent,
+    UserPageComponent
   ],
   imports: [
     BrowserModule,

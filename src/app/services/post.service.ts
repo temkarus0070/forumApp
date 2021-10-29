@@ -23,6 +23,13 @@ export class PostService {
     return this.httpClient.get<Array<Post>>(BACKEND_URL+"/post/getPostsBySection",{params:{sectionId:id}});
   }
 
+
+  loadByHeader(postHeader:string):Observable<Array<Post>>{
+    if(postHeader!=null)
+      return this.httpClient.get<Array<Post>>(BACKEND_URL+"/post/findPostsByHeader",{params:{header:postHeader}});
+    return new Observable<Array<Post>>();
+  }
+
   create(post:Post){
     let httpHeaders:HttpHeaders=new HttpHeaders();
     httpHeaders.set("Content-Type","application/json");
