@@ -2,7 +2,7 @@
   <h2>{{post.header}}</h2>
   <button class="editBtn" *ngIf="isItCurrentUserPost()" (click)="editPost()">edit</button>
   <div id="postData">
-    <p id="authorName">{{post?.user?.username}}</p>
+    <a href="/user/{{post?.user?.username}}" id="authorName">{{post?.user?.username}}</a>
     <p>{{post.date | date}}</p>
   </div>
   <div id="postProperty">

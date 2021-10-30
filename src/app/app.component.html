@@ -7,6 +7,7 @@
   <a href="/post/create" *ngIf="isAuthorized">create post</a>
   <a href="/section/create" *ngIf="isAdmin()">create section</a>
   <a href="" (click)="logout()" *ngIf="isAuthorized">logout</a>
+  <a href="/user/{{userName}}">{{userName}}</a>
 
 </nav>
 <router-outlet>
